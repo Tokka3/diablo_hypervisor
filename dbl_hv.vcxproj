@@ -116,18 +116,18 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cpuid.h" />
-    <ClInclude Include="efer.h" />
-    <ClInclude Include="feature_control.h" />
     <ClInclude Include="includes.h" />
-    <ClInclude Include="init.h" />
-    <ClInclude Include="vmx_basic.h" />
-    <ClInclude Include="vmx_entry_ctl.h" />
-    <ClInclude Include="vmx_exit_ctl.h" />
-    <ClInclude Include="vmx_misc.h" />
-    <ClInclude Include="vmx_pinbased_ctl.h" />
-    <ClInclude Include="vmx_primary_processor_based_ctl.h" />
-    <ClInclude Include="vmx_secondary_processor_based_ctl.h" />
+    <ClInclude Include="struct_defs\cpuid.h" />
+    <ClInclude Include="struct_defs\efer.h" />
+    <ClInclude Include="struct_defs\feature_control.h" />
+    <ClInclude Include="struct_defs\vmx_basic.h" />
+    <ClInclude Include="struct_defs\vmx_entry_ctl.h" />
+    <ClInclude Include="struct_defs\vmx_exit_ctl.h" />
+    <ClInclude Include="struct_defs\vmx_misc.h" />
+    <ClInclude Include="struct_defs\vmx_pinbased_ctl.h" />
+    <ClInclude Include="struct_defs\vmx_primary_processor_based_ctl.h" />
+    <ClInclude Include="struct_defs\vmx_secondary_processor_based_ctl.h" />
+    <ClInclude Include="util\init.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

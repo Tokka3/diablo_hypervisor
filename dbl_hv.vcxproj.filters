@@ -38,41 +38,41 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="efer.h">
+    <ClInclude Include="struct_defs\cpuid.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="feature_control.h">
+    <ClInclude Include="struct_defs\efer.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_misc.h">
+    <ClInclude Include="struct_defs\feature_control.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_basic.h">
+    <ClInclude Include="struct_defs\vmx_basic.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_pinbased_ctl.h">
+    <ClInclude Include="struct_defs\vmx_entry_ctl.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_primary_processor_based_ctl.h">
+    <ClInclude Include="struct_defs\vmx_exit_ctl.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_secondary_processor_based_ctl.h">
+    <ClInclude Include="struct_defs\vmx_misc.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_exit_ctl.h">
+    <ClInclude Include="struct_defs\vmx_pinbased_ctl.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="vmx_entry_ctl.h">
+    <ClInclude Include="struct_defs\vmx_primary_processor_based_ctl.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="init.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="struct_defs\vmx_secondary_processor_based_ctl.h">
+      <Filter>struct_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="util\init.h">
+      <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="includes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cpuid.h">
-      <Filter>struct_defs</Filter>
+      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

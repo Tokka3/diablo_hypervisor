@@ -1,7 +1,9 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Debug\dbl_hv.inf
-  Stamping [Version] section with DriverVer=11/16/2023,10.9.51.328
+  Stamping [Version] section with DriverVer=11/16/2023,11.1.13.666
+  init.c
   main.c
+  Generating Code...
   dbl_hv.vcxproj -> C:\Users\admin\source\repos\dbl_hv\x64\Debug\dbl_hv.sys
   Driver is 'Universal'.
   .........................
