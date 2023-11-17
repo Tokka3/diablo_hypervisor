@@ -116,6 +116,8 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="control_fields\vmx_exit.h" />
+    <ClInclude Include="control_fields\vm_entry.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />

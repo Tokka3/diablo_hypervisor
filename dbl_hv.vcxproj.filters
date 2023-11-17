@@ -15,6 +15,9 @@
     <Filter Include="utility">
       <UniqueIdentifier>{aceef8b4-473f-4ccf-a353-d592322c8787}</UniqueIdentifier>
     </Filter>
+    <Filter Include="control_fields">
+      <UniqueIdentifier>{5c817700-81f5-4a9f-82b2-2f21fbe9307a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Inf Include="dbl_hv.inf">
@@ -80,6 +83,12 @@
     </ClInclude>
     <ClInclude Include="vmcs.h">
       <Filter>struct_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="control_fields\vm_entry.h">
+      <Filter>control_fields</Filter>
+    </ClInclude>
+    <ClInclude Include="control_fields\vmx_exit.h">
+      <Filter>control_fields</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #pragma warning(disable: 6273)
 #pragma warning(disable: 4242)
 #pragma warning(disable: 4244)
+#pragma warning(disable: 28182)
 #include "util/init.h"
 #include "struct_defs/cpuid.h"
 #include "struct_defs/feature_control.h"
@@ -111,12 +112,26 @@ void adjust_control_registers(void)
 int vmm_init(void)
 {
     struct __vmm_context_t* vmm_context;
+    PROCESSOR_NUMBER processor_number;
+    GROUP_AFFINITY affinity, old_affinity;
+   // KIRQL old_irql;
     vmm_context = allocate_vmm_context();
     for (unsigned iter = 0; iter < vmm_context->processor_count; iter++) {
         vmm_context->vcpu_table[iter] = init_vcpu();
         vmm_context->vcpu_table[iter]->vmm_context = vmm_context;
     }
-    init_logical_processor(vmm_context, 0);
+    for (unsigned iter = 0; iter < vmm_context->processor_count; iter++) {
+        //
+        // Convert from an index to a processor number.
+        //
+        KeGetProcessorNumberFromIndex(iter, &processor_number);
+        RtlSecureZeroMemory(&affinity, sizeof(GROUP_AFFINITY));
+        affinity.Group = processor_number.Group;
+        affinity.Mask = (KAFFINITY)1 << processor_number.Number;
+        KeSetSystemGroupAffinityThread(&affinity, &old_affinity);
+        init_logical_processor(vmm_context, 0);
+        KeRevertToUserGroupAffinityThread(&old_affinity);
+    }
     return TRUE;
 }
 
