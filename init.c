@@ -85,10 +85,18 @@ struct __vcpu_t* init_vcpu(void)
     struct __vcpu_t* vcpu = NULL;
     vcpu = ExAllocatePoolWithTag(NonPagedPool, sizeof(struct __vcpu_t), VMM_TAG);
     if (!vcpu) {
-       // log_error("Oops! vcpu could not be allocated.\n");
+        DbgPrintEx(0, 0, "Oops! vcpu could not be allocated.\n");
         return NULL;
     }
     RtlSecureZeroMemory(vcpu, sizeof(struct __vcpu_t));
+    //
+    // Zero out msr bitmap so that no traps occur on MSR accesses
+    // when in guest operation.
+    //
+    vcpu->msr_bitmap = ExAllocatePoolWithTag(NonPagedPool, PAGE_SIZE, VMM_TAG);
+    RtlSecureZeroMemory(vcpu->msr_bitmap, PAGE_SIZE);
+    vcpu->msr_bitmap_physical = MmGetPhysicalAddress(vcpu->msr_bitmap).QuadPart;
+    DbgPrintEx(0, 0,"vcpu entry allocated successfully at %llX\n", vcpu);
     return vcpu;
 }
 void adjust_control_registers(void)
