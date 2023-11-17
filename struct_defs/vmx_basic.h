@@ -1,5 +1,5 @@
 #pragma once
-
+#define IA32_VMX_BASIC_MSR 0x480
 union __vmx_basic_msr_t
 {
     unsigned __int64 control;

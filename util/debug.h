@@ -1,11 +1,15 @@
 #pragma once
-#include <cstdarg>
-#include "includes.h"
+
+#include "../includes.h"
 
 void log_debug(const char* fmt, ...)
 {
-	va_list args;
-	va_start(args, fmt);
-	vDbgPrintExWithPrefix("[*] ", DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, fmt, args);
-	va_end(args);
+	DbgPrintEx(0, 0, fmt);
+}
+
+void log_success(const char* fmt, ...)
+{
+	
+	DbgPrintEx(0, 0, fmt);
+	
 }

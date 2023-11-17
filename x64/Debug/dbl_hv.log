@@ -1,6 +1,6 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Debug\dbl_hv.inf
-  Stamping [Version] section with DriverVer=11/16/2023,11.1.13.666
+  Stamping [Version] section with DriverVer=11/18/2023,4.13.11.89
   init.c
   main.c
   Generating Code...

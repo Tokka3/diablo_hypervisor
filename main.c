@@ -1,6 +1,6 @@
 #include "includes.h"
 #include "util/init.h"
-
+#include "struct_defs/vmm_context.h"
 
 NTSTATUS DriverUnload(PDRIVER_OBJECT driver_obj) {
 
@@ -17,12 +17,15 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver_obj, PUNICODE_STRING reg_path) {
 	driver_obj->DriverUnload = DriverUnload;
 	DbgPrintEx(0, 0, "[+] Driver Entry Called");
 	
-	if (CheckVMXSupport()) {
+	if (check_vmx_support()) {
 		DbgPrintEx(0, 0, "[+] VMX Supported");
-		DbgPrintEx(0, 0, "[+] CPUID: EAX");
+		vmm_init();
+		
 	}
 	else {
 		DbgPrintEx(0, 0, "[+] VMX Not Supported");
+
+		return STATUS_SUCCESS;
 	}
 
 

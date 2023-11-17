@@ -117,9 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes.h" />
+    <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />
     <ClInclude Include="struct_defs\efer.h" />
     <ClInclude Include="struct_defs\feature_control.h" />
+    <ClInclude Include="struct_defs\vcpu.h" />
+    <ClInclude Include="struct_defs\vmm_context.h" />
     <ClInclude Include="struct_defs\vmx_basic.h" />
     <ClInclude Include="struct_defs\vmx_entry_ctl.h" />
     <ClInclude Include="struct_defs\vmx_exit_ctl.h" />
@@ -127,7 +130,9 @@
     <ClInclude Include="struct_defs\vmx_pinbased_ctl.h" />
     <ClInclude Include="struct_defs\vmx_primary_processor_based_ctl.h" />
     <ClInclude Include="struct_defs\vmx_secondary_processor_based_ctl.h" />
+    <ClInclude Include="util\debug.h" />
     <ClInclude Include="util\init.h" />
+    <ClInclude Include="vmcs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
