@@ -196,5 +196,7 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
        // free_vmm_context(vmm_context);
         return;
     }
+
+    
     DbgPrintEx(0, 0, "vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
 }

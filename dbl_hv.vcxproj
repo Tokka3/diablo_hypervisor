@@ -116,8 +116,11 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="control\control_encodings.h" />
     <ClInclude Include="control_fields\vmx_exit.h" />
     <ClInclude Include="control_fields\vm_entry.h" />
+    <ClInclude Include="guest_state\guest_state_encodings.h" />
+    <ClInclude Include="host_state\host_state_encodings.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />
@@ -133,6 +136,7 @@
     <ClInclude Include="struct_defs\vmx_primary_processor_based_ctl.h" />
     <ClInclude Include="struct_defs\vmx_secondary_processor_based_ctl.h" />
     <ClInclude Include="util\debug.h" />
+    <ClInclude Include="util\encoding.h" />
     <ClInclude Include="util\init.h" />
     <ClInclude Include="vmcs.h" />
   </ItemGroup>

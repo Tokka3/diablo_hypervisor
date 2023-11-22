@@ -1,0 +1,40 @@
+#include "../util/encoding.h"
+
+enum __vmcs_fields_host_e
+{
+
+    //16 bit host-state fields
+
+    HOST_ES_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 0),
+    HOST_CS_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 1),
+    HOST_SS_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 2),
+    HOST_DS_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 3),
+    HOST_FS_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 4),
+    HOST_GS_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 5),
+    HOST_TR_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 6),
+
+    //32 bit host-state field 
+    
+    HOST_SYSENTER_CS = VMCS_ENCODE_COMPONENT_FULL_32(host, 0),
+    
+    // natural host-state fields
+
+    HOST_CR0 = VMCS_ENCODE_COMPONENT_FULL(host, natural, 0),
+    HOST_CR3 = VMCS_ENCODE_COMPONENT_FULL(host, natural, 1),
+    HOST_CR4 = VMCS_ENCODE_COMPONENT_FULL(host, natural, 2),
+    HOST_FS_BASE = VMCS_ENCODE_COMPONENT_FULL(host, natural, 3),
+    HOST_GS_BASE = VMCS_ENCODE_COMPONENT_FULL(host, natural, 4),
+    HOST_TR_BASE = VMCS_ENCODE_COMPONENT_FULL(host, natural, 5),
+    HOST_GDTR_BASE = VMCS_ENCODE_COMPONENT_FULL(host, natural, 6),
+    HOST_IDTR_BASE = VMCS_ENCODE_COMPONENT_FULL(host, natural, 7),
+    HOST_SYSENTER_ESP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 8),
+    HOST_SYSENTER_EIP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 9),
+    HOST_RSP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 10),
+    HOST_RIP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 11),
+    HOST_IA32_S_CET = VMCS_ENCODE_COMPONENT_FULL(host, natural, 12),
+    HOST_SSP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 13),
+    HOST_INTERRUPT_SSP_TABLE_ADDR = VMCS_ENCODE_COMPONENT_FULL(host, natural, 14),
+   
+
+};
+
