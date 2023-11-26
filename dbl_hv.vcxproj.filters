@@ -18,14 +18,20 @@
     <Filter Include="control_fields">
       <UniqueIdentifier>{5c817700-81f5-4a9f-82b2-2f21fbe9307a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="guest_state_encodings">
-      <UniqueIdentifier>{3d2b50f5-ea77-49b0-9852-a2a56164616d}</UniqueIdentifier>
+    <Filter Include="encodings">
+      <UniqueIdentifier>{8e52a874-c928-45cd-9332-f24033ba0b94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="host_state_encodings">
+    <Filter Include="encodings\host_state_encodings">
       <UniqueIdentifier>{f5d29982-78f1-4bce-bcf9-bc14a092b98a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="control_encodings">
+    <Filter Include="encodings\guest_state_encodings">
+      <UniqueIdentifier>{3d2b50f5-ea77-49b0-9852-a2a56164616d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="encodings\control_encodings">
       <UniqueIdentifier>{5d04cd9c-bc82-43ea-ade8-880b56562924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="encodings\vm_exit_encodings">
+      <UniqueIdentifier>{a0809cb6-8207-47e4-9cbb-18f493930321}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,17 +105,20 @@
     <ClInclude Include="control_fields\vmx_exit.h">
       <Filter>control_fields</Filter>
     </ClInclude>
-    <ClInclude Include="guest_state\guest_state_encodings.h">
-      <Filter>guest_state_encodings</Filter>
-    </ClInclude>
     <ClInclude Include="util\encoding.h">
       <Filter>utility</Filter>
     </ClInclude>
-    <ClInclude Include="host_state\host_state_encodings.h">
-      <Filter>host_state_encodings</Filter>
+    <ClInclude Include="encodings\control\control_encodings.h">
+      <Filter>encodings\control_encodings</Filter>
     </ClInclude>
-    <ClInclude Include="control\control_encodings.h">
-      <Filter>control_encodings</Filter>
+    <ClInclude Include="encodings\guest_state\guest_state_encodings.h">
+      <Filter>encodings\guest_state_encodings</Filter>
+    </ClInclude>
+    <ClInclude Include="encodings\host_state\host_state_encodings.h">
+      <Filter>encodings\host_state_encodings</Filter>
+    </ClInclude>
+    <ClInclude Include="encodings\vmexit\vm_exit_encodings.h">
+      <Filter>encodings\vm_exit_encodings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

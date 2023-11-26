@@ -116,11 +116,12 @@
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="control\control_encodings.h" />
     <ClInclude Include="control_fields\vmx_exit.h" />
     <ClInclude Include="control_fields\vm_entry.h" />
-    <ClInclude Include="guest_state\guest_state_encodings.h" />
-    <ClInclude Include="host_state\host_state_encodings.h" />
+    <ClInclude Include="encodings\control\control_encodings.h" />
+    <ClInclude Include="encodings\guest_state\guest_state_encodings.h" />
+    <ClInclude Include="encodings\host_state\host_state_encodings.h" />
+    <ClInclude Include="encodings\vmexit\vm_exit_encodings.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />

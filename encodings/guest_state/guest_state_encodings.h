@@ -1,6 +1,4 @@
-
-#include "../util/encoding.h"
-
+#include "../../util/encoding.h"
 enum __vmcs_fields_guest_e
 {
     //natural guest register state fields
