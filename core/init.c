@@ -17,7 +17,7 @@
 #include "../encodings/control/control_encodings.h"
 
 #include "../headers/vmx.h"
-
+#include "../asm/vmm_intrin.h"
 #define VMX_OK 0x0
 
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp);
@@ -123,7 +123,52 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
 
     entry_controls.control = 0;
     entry_controls.bits.ia32e_mode_guest = TRUE;
+
+    union __vmx_exit_control_t exit_controls;
+    //
+    // Zero the control value, set address space size, save and load IA32_EFER.
+    //
+    exit_controls.control = 0;
+    exit_controls.bits.host_address_space_size = TRUE;
+
+
+    vmx_adjust_exit_controls(&exit_controls);
+
+    vmx_adjust_entry_controls(&entry_controls);
+
+    union __vmx_pinbased_control_msr_t pinbased_controls;
+    pinbased_controls.control = 0;
+    vmx_adjust_pinbased_controls(&pinbased_controls);
+
+    union __vmx_primary_processor_based_control_t primary_controls;
+    primary_controls.control = 0;
+    primary_controls.bits.use_msr_bitmaps = TRUE;
+    primary_controls.bits.active_secondary_controls = TRUE;
+    vmx_adjust_processor_based_controls(&primary_controls);
+
+    union __vmx_secondary_processor_based_control_t secondary_controls;
+    secondary_controls.control = 0;
+    secondary_controls.bits.enable_rdtscp = TRUE;
+    secondary_controls.bits.enable_xsave_xrstor = TRUE;
+    secondary_controls.bits.enable_invpcid = TRUE;
+    vmx_adjust_secondary_controls(&secondary_controls);
+
+    __vmx_vmwrite(CTRL_PIN_BASED_VM_EXECUTION_CONTROLS, pinbased_controls.control);
+    __vmx_vmwrite(CTRL_PRIMARY_PROCESSOR_BASED_VM_EXECUTION_CONTROLS, primary_controls.control);
+    __vmx_vmwrite(CTRL_SECONDARY_PROCESSOR_BASED_VM_EXECUTION_CONTROLS, secondary_controls.control);
+    __vmx_vmwrite(CTRL_PRIMARY_VM_EXIT_CONTROLS, exit_controls.control);
+    __vmx_vmwrite(CTRL_VM_ENTRY_CONTROLS, entry_controls.control);
   //__vmx_vmwrite(HOST_RIP, vmm_en)
+
+
+    __vmx_vmwrite(GUEST_CS_SELECTOR, __read_cs());
+    __vmx_vmwrite(GUEST_SS_SELECTOR, __read_ss());
+    __vmx_vmwrite(GUEST_DS_SELECTOR, __read_ds());
+    __vmx_vmwrite(GUEST_ES_SELECTOR, __read_es());
+    __vmx_vmwrite(GUEST_FS_SELECTOR, __read_fs());
+    __vmx_vmwrite(GUEST_GS_SELECTOR, __read_fs());
+    __vmx_vmwrite(GUEST_LDTR_SELECTOR, __read_ldtr());
+    __vmx_vmwrite(GUEST_TR_SELECTOR, __read_tr());
 
 
     return TRUE;

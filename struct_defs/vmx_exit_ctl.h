@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef VMX_EXIT_CTL
+#define VMX_EXIT_CTL
+
+
 union __vmx_exit_control_t
 {
     unsigned __int64 control;
@@ -23,3 +27,5 @@ union __vmx_exit_control_t
         unsigned __int64 conceal_vmx_from_pt : 1;
     } bits;
 };
+
+#endif // !VMX_EXIT_CTL

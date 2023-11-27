@@ -36,6 +36,9 @@
     <Filter Include="headers">
       <UniqueIdentifier>{664e58b7-3d5e-4e43-ba86-e5c1040b8cf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="asm">
+      <UniqueIdentifier>{e108b8fd-1a05-493a-8450-53300e7e11fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Inf Include="dbl_hv.inf">
@@ -139,5 +142,13 @@
     <ClInclude Include="headers\vmx.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="asm\vmm_intrin.h">
+      <Filter>asm</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\vmm_intrin.asm">
+      <Filter>asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

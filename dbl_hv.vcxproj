@@ -118,6 +118,7 @@
     <ClCompile Include="vmcs\vmcs.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="asm\vmm_intrin.h" />
     <ClInclude Include="control_fields\vmx_exit.h" />
     <ClInclude Include="control_fields\vm_entry.h" />
     <ClInclude Include="encodings\control\control_encodings.h" />
@@ -146,6 +147,9 @@
     <ClInclude Include="util\debug.h" />
     <ClInclude Include="util\encoding.h" />
     <ClInclude Include="vmcs\vmcs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\vmm_intrin.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
