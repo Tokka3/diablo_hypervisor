@@ -1,3 +1,7 @@
+#ifndef ENCODING
+#define ENCODING
+
+
 enum __vmcs_access_e
 {
     full = 0,
@@ -36,3 +40,5 @@ enum __vmcs_width_e
 #define VMCS_ENCODE_COMPONENT_HIGH_16( type, index )        VMCS_ENCODE_COMPONENT_HIGH( type, word, index )
 #define VMCS_ENCODE_COMPONENT_HIGH_32( type, index )        VMCS_ENCODE_COMPONENT_HIGH( type, doubleword, index )
 #define VMCS_ENCODE_COMPONENT_HIGH_64( type, index )        VMCS_ENCODE_COMPONENT_HIGH( type, quadword, index )
+
+#endif // !ENCODING

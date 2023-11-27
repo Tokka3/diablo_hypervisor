@@ -1,5 +1,10 @@
 #pragma once
 
+#ifndef VMCS_STRUCT
+#define VMCS_STRUCT
+
+
+
 struct __vmcs_t
 {
     union
@@ -14,3 +19,4 @@ struct __vmcs_t
     unsigned int abort_indicator;
     char data[0x1000 - 2 * sizeof(unsigned)];
 };
+#endif 

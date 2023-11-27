@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef  VMX_MISC
+#define VMX_MISC
+
+
 union __vmx_misc_msr_t
 {
     unsigned __int64 control;
@@ -20,3 +24,4 @@ union __vmx_misc_msr_t
         unsigned __int64 mseg_revision_identifier : 32;
     } bits;
 };
+#endif // ! VMX_MISC

@@ -1,5 +1,5 @@
-#include "includes.h"
-#include "util/init.h"
+#include "headers/includes.h"
+#include "headers/init.h"
 #include "struct_defs/vmm_context.h"
 
 NTSTATUS DriverUnload(PDRIVER_OBJECT driver_obj) {

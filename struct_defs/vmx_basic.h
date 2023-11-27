@@ -1,5 +1,8 @@
 #pragma once
+#ifndef VMX_BASIC_MSR
+#define VMX_BASIC_MSR
 #define IA32_VMX_BASIC_MSR 0x480
+
 union __vmx_basic_msr_t
 {
     unsigned __int64 control;
@@ -16,3 +19,5 @@ union __vmx_basic_msr_t
         unsigned __int64 true_controls : 1;
     } bits;
 };
+
+#endif

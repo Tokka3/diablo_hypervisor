@@ -1,7 +1,7 @@
 #pragma once
-#include "../includes.h"
+#include "../headers/includes.h"
 #include "../struct_defs/vcpu.h"
-#include "../struct_defs/vmcs.h"
+#include "../struct_defs/vmcs_.h"
 #include "../struct_defs/vmm_context.h"
 int check_vmx_support();
 	 

@@ -1,5 +1,8 @@
 #pragma once 
 
+#ifndef CONTROL_REGISTERS
+#define CONTROL_REGISTERS
+
 #define IA32_VMX_CR0_FIXED0 0x486
 #define IA32_VMX_CR0_FIXED1 0x487
 
@@ -92,3 +95,6 @@ union __cr_fixed_t
     } u;
     long long all;
 };
+
+
+#endif

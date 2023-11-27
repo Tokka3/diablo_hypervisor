@@ -1,23 +1,23 @@
+#include "../headers/includes.h"
 
-#pragma warning (disable: 4996)
-#pragma warning(disable: 4100)
-#pragma warning(disable: 6273)
-#pragma warning(disable: 4242)
-#pragma warning(disable: 4244)
-#pragma warning(disable: 28182)
-#include "util/init.h"
-#include "struct_defs/cpuid.h"
-#include "struct_defs/feature_control.h"
-#include "struct_defs/control_registers.h"
-#include "struct_defs/vmx_basic.h"
-#include "struct_defs/vcpu.h"
-#include "struct_defs/vmx_misc.h"
-#include "struct_defs/vmx_entry_ctl.h"
-#include "util/debug.h"
-#include "encodings/guest_state/guest_state_encodings.h"
-#include "encodings/host_state/host_state_encodings.h"
-#include "encodings/vmexit/vm_exit_encodings.h"
-#include "encodings/control/control_encodings.h"
+
+#include "../headers/init.h"
+#include "../struct_defs/cpuid.h"
+#include "../struct_defs/feature_control.h"
+#include "../struct_defs/control_registers.h"
+
+#include "../struct_defs/vcpu.h"
+
+#include "../struct_defs/vmx_entry_ctl.h"
+
+#include "../util/debug.h"
+#include "../encodings/guest_state/guest_state_encodings.h"
+#include "../encodings/host_state/host_state_encodings.h"
+#include "../encodings/vmexit/vm_exit_encodings.h"
+#include "../encodings/control/control_encodings.h"
+
+#include "../headers/vmx.h"
+
 #define VMX_OK 0x0
 
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp);
@@ -116,15 +116,13 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(CTRL_CR4_READ_SHADOW, __readcr4());
 
 
-    unsigned __int64 vmm_stack = (unsigned __int64)&vcpu->vmm_stack.vmm_context;
+   
     __vmx_vmwrite(HOST_RSP, vmm_stack);
 
     union __vmx_entry_control_t entry_controls;
 
     entry_controls.control = 0;
     entry_controls.bits.ia32e_mode_guest = TRUE;
-
-    
   //__vmx_vmwrite(HOST_RIP, vmm_en)
 
 

@@ -1,4 +1,7 @@
 #pragma once
+#ifndef  VM_ENTRY_CTL
+#define VM_ENTRY_CTL
+
 
 union __vmx_entry_control_t
 {
@@ -19,3 +22,5 @@ union __vmx_entry_control_t
         unsigned __int64 conceal_vmx_from_pt : 1;
     } bits;
 };
+
+#endif // ! VM_ENTRY_CTL
