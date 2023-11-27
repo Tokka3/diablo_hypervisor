@@ -18,6 +18,10 @@
 
 #include "../headers/vmx.h"
 #include "../asm/vmm_intrin.h"
+
+#include "../segments/segments.h"
+
+
 #define VMX_OK 0x0
 
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp);
@@ -166,9 +170,34 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(GUEST_DS_SELECTOR, __read_ds());
     __vmx_vmwrite(GUEST_ES_SELECTOR, __read_es());
     __vmx_vmwrite(GUEST_FS_SELECTOR, __read_fs());
-    __vmx_vmwrite(GUEST_GS_SELECTOR, __read_fs());
+    __vmx_vmwrite(GUEST_GS_SELECTOR, __read_gs());
     __vmx_vmwrite(GUEST_LDTR_SELECTOR, __read_ldtr());
     __vmx_vmwrite(GUEST_TR_SELECTOR, __read_tr());
+
+    struct __pseudo_descriptor_64_t gdtr;
+    struct __pseudo_descriptor_64_t idtr;
+    
+    _sgdt(&gdtr);
+    __sidt(&idtr);
+
+    __vmx_vmwrite(GUEST_GDTR_LIMIT, gdtr.limit);
+    __vmx_vmwrite(GUEST_IDTR_LIMIT, idtr.limit);
+
+    __vmx_vmwrite(GUEST_GDTR_BASE, gdtr.base_address);
+    __vmx_vmwrite(GUEST_IDTR_BASE, idtr.base_address);
+
+    __vmx_vmwrite(GUEST_CS_ACCESS_RIGHTS, read_segment_access_rights(__read_cs()));
+    __vmx_vmwrite(GUEST_SS_ACCESS_RIGHTS, read_segment_access_rights(__read_ss()));
+    __vmx_vmwrite(GUEST_DS_ACCESS_RIGHTS, read_segment_access_rights(__read_ds()));
+    __vmx_vmwrite(GUEST_ES_ACCESS_RIGHTS, read_segment_access_rights(__read_es()));
+    __vmx_vmwrite(GUEST_FS_ACCESS_RIGHTS, read_segment_access_rights(__read_fs()));
+    __vmx_vmwrite(GUEST_GS_ACCESS_RIGHTS, read_segment_access_rights(__read_gs()));
+    __vmx_vmwrite(GUEST_LDTR_ACCESS_RIGHTS, read_segment_access_rights(__read_ldtr()));
+    __vmx_vmwrite(GUEST_TR_ACCESS_RIGHTS, read_segment_access_rights(__read_tr()));
+
+    __vmx_vmwrite(GUEST_LDTR_BASE, get_segment_base(gdtr.base_address, __read_ldtr()));
+    __vmx_vmwrite(GUEST_TR_BASE, get_segment_base(gdtr.base_address, __read_tr()));
+
 
 
     return TRUE;

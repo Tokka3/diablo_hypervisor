@@ -15,4 +15,5 @@ unsigned short __read_ds(void);
 unsigned short __read_es(void);
 unsigned short __read_fs(void);
 unsigned short __read_gs(void);
+unsigned short __load_ar(void);
 #endif // !ASM_DEFS

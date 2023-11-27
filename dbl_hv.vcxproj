@@ -115,6 +115,7 @@
     <ClCompile Include="core\init.c" />
     <ClCompile Include="core\vmx.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="segments\segments.c" />
     <ClCompile Include="vmcs\vmcs.c" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +131,7 @@
     <ClInclude Include="headers\msr.h" />
     <ClInclude Include="headers\vmcs.h" />
     <ClInclude Include="headers\vmx.h" />
+    <ClInclude Include="segments\segments.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />
     <ClInclude Include="struct_defs\efer.h" />

@@ -39,6 +39,9 @@
     <Filter Include="asm">
       <UniqueIdentifier>{e108b8fd-1a05-493a-8450-53300e7e11fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="segments">
+      <UniqueIdentifier>{bbf6da24-b70f-415b-859b-0432d8d0440f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Inf Include="dbl_hv.inf">
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="core\vmx.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="segments\segments.c">
+      <Filter>segments</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="asm\vmm_intrin.h">
       <Filter>asm</Filter>
+    </ClInclude>
+    <ClInclude Include="segments\segments.h">
+      <Filter>segments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

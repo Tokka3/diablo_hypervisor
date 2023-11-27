@@ -5,7 +5,7 @@
 #define IA32_VMX_ENTRY_CTLS 0x484
 #define IA32_VMX_TRUE_EXIT_CTLS 0x48F
 #define IA32_VMX_EXIT_CTLS 0x483
-static uintptr_t vmx_adjust_cv(unsigned int capability_msr, unsigned int value)
+ uintptr_t vmx_adjust_cv(unsigned int capability_msr, unsigned int value)
 {
     union __vmx_true_control_settings_t cap;
     unsigned int actual;
@@ -19,7 +19,7 @@ static uintptr_t vmx_adjust_cv(unsigned int capability_msr, unsigned int value)
     return actual;
 
 }
-static void vmx_adjust_entry_controls(union __vmx_entry_control_t* entry_controls)
+ void vmx_adjust_entry_controls(union __vmx_entry_control_t* entry_controls)
 {
     unsigned int capability_msr;
     union __vmx_basic_msr_t basic;
@@ -30,7 +30,7 @@ static void vmx_adjust_entry_controls(union __vmx_entry_control_t* entry_control
     entry_controls->control = (uintptr_t)vmx_adjust_cv(capability_msr, entry_controls->control);
 }
 
-static void vmx_adjust_exit_controls(union __vmx_exit_control_t* exit_controls)
+ void vmx_adjust_exit_controls(union __vmx_exit_control_t* exit_controls)
 {
     unsigned int capability_msr;
     union __vmx_basic_msr_t basic;
@@ -39,18 +39,16 @@ static void vmx_adjust_exit_controls(union __vmx_exit_control_t* exit_controls)
     exit_controls->control = (uintptr_t)vmx_adjust_cv(capability_msr, exit_controls->control);
 }
 
-static void vmx_adjust_pinbased_controls(union __vmx_pinbased_control_msr_t* pinbased_controls)
+ void vmx_adjust_pinbased_controls(union __vmx_pinbased_control_msr_t* pinbased_controls)
 {
     unsigned int capability_msr;
     union __vmx_basic_msr_t basic;
     basic.control = __readmsr(IA32_VMX_BASIC);
     capability_msr = (basic.bits.true_controls != FALSE) ? IA32_VMX_TRUE_EXIT_CTLS : IA32_VMX_EXIT_CTLS;
     pinbased_controls->control = (uintptr_t)vmx_adjust_cv(capability_msr, pinbased_controls->control);
-
-
 }
 
-static void vmx_adjust_processor_based_controls(union __vmx_primary_processor_based_control_t* processor_based_controls) {
+ void vmx_adjust_processor_based_controls(union __vmx_primary_processor_based_control_t* processor_based_controls) {
 
     unsigned int capability_msr;
     union __vmx_basic_msr_t basic;
@@ -59,7 +57,7 @@ static void vmx_adjust_processor_based_controls(union __vmx_primary_processor_ba
     processor_based_controls->control = (uintptr_t)vmx_adjust_cv(capability_msr, processor_based_controls->control);
 }
 
-static void vmx_adjust_secondary_controls(union __vmx_secondary_processor_based_control_t* secondary_controls) {
+ void vmx_adjust_secondary_controls(union __vmx_secondary_processor_based_control_t* secondary_controls) {
     unsigned int capability_msr;
     union __vmx_basic_msr_t basic;
     basic.control = __readmsr(IA32_VMX_BASIC);
