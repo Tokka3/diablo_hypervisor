@@ -318,7 +318,7 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     processor_number = KeGetCurrentProcessorNumber();
     vmm_context = (struct __vmm_context_t*)context;
     vcpu = vmm_context->vcpu_table[processor_number];
-    log_debug("vcpu %d guest_rsp = %llX\n", processor_number, guest_rsp);
+    Log("vcpu %d guest_rsp = %llX\n", processor_number, guest_rsp);
     adjust_control_registers();
     if (!check_vmx_support()) {
         Log("VMX operation is not supported on this processor.\n");
@@ -349,7 +349,7 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
         Log("vmlaunch failed: %u", vmx_error);
         // Some clean-up procedure
     }
-
+    
     Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
 }
 

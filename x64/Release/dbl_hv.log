@@ -1,18 +1,12 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Release\dbl_hv.inf
-  Stamping [Version] section with DriverVer=11/28/2023,1.43.10.779
-  Assembling asm\vmm_intrin.asm...
+  Stamping [Version] section with DriverVer=11/28/2023,3.17.34.274
+C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(559,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\stampinf.command.1.tlog" being invalid.
   init.c
-  logging.c
-  vmexit.c
-  vmx.c
-  main.c
-  segments.c
-  vmcs.c
-  Generating Code...
   dbl_hv.vcxproj -> C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.sys
   Driver is 'Universal'.
-  ........................
+C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(1362,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\Inf2Cat.command.1.tlog" being invalid.
+  .........................
   Signability test complete.
   
   Errors:
@@ -23,3 +17,4 @@
   
   Catalog generation complete.
   C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv\dbl_hv.cat
+C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(1362,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\Inf2Cat.command.1.tlog" being invalid.

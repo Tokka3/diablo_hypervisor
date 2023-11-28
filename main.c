@@ -21,7 +21,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver_obj, PUNICODE_STRING reg_path) {
 	
 	if (check_vmx_support()) {
 		Log("[+] VMX Supported\n");
-		//vmm_init();
+		vmm_init();
 		
 	}
 	else {
