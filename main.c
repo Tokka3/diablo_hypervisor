@@ -14,7 +14,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver_obj, PUNICODE_STRING reg_path) {
 
 	UNREFERENCED_PARAMETER(reg_path);
 	UNREFERENCED_PARAMETER(driver_obj);
-	driver_obj->DriverUnload = DriverUnload;
+	
 	DbgPrintEx(0, 0, "[+] Driver Entry Called");
 	
 	if (check_vmx_support()) {

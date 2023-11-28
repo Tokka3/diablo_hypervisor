@@ -75,7 +75,7 @@ struct __vmm_context_t* allocate_vmm_context(void)
 	log_debug("vmm stack allocated at %llX\n", vmm_context->stack);*/
     return vmm_context;
 };
-int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int is_pt_allowed)
+int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /*void (*guest_rip)() ,*/ int is_pt_allowed)
 {
 
     struct __vmcs_t* vmcs;
@@ -304,10 +304,11 @@ int init_vmxon(struct __vcpu_t* vcpu)
     return TRUE;
 }
 
-
+/*
 void guest_entry_stub() {
 
 }
+*/
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
 {
     struct __vmm_context_t* vmm_context;
@@ -338,7 +339,7 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
         return;
     }
 
-    init_vmcs(vcpu, guest_rsp, guest_entry_stub, 0);
+    init_vmcs(vcpu, guest_rsp, /*guest_entry_stub,*/ 0);
 
    unsigned char status = __vmx_vmlaunch();
     if (status != 0)
