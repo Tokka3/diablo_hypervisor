@@ -1,3 +1,4 @@
+#include "../logging.h"
 #include "../headers/includes.h"
 
 
@@ -91,7 +92,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     vmcs->header.bits.shadow_vmcs_indicator = 0;
 
     if (__vmx_vmclear(&vcpu->vmcs_physical) != VMX_OK || __vmx_vmptrld(&vcpu->vmcs_physical) != VMX_OK) {
-        DbgPrintEx(0, 0, "Failed to clear or lead VMCS Physical Address");
+        Log("Failed to clear or lead VMCS Physical Address\n");
     }
 
     unsigned __int64 vmm_stack = (unsigned __int64)&vcpu->vmm_stack.vmm_context;
@@ -163,7 +164,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(CTRL_SECONDARY_PROCESSOR_BASED_VM_EXECUTION_CONTROLS, secondary_controls.control);
     __vmx_vmwrite(CTRL_PRIMARY_VM_EXIT_CONTROLS, exit_controls.control);
     __vmx_vmwrite(CTRL_VM_ENTRY_CONTROLS, entry_controls.control);
-  //__vmx_vmwrite(HOST_RIP, vmm_en)
+    //__vmx_vmwrite(HOST_RIP, vmm_en)
 
 
     __vmx_vmwrite(GUEST_CS_SELECTOR, __read_cs());
@@ -222,7 +223,7 @@ struct __vcpu_t* init_vcpu(void)
     struct __vcpu_t* vcpu = NULL;
     vcpu = ExAllocatePoolWithTag(NonPagedPool, sizeof(struct __vcpu_t), VMM_TAG);
     if (!vcpu) {
-        DbgPrintEx(0, 0, "Oops! vcpu could not be allocated.\n");
+        Log("Oops! vcpu could not be allocated.\n");
         return NULL;
     }
     RtlSecureZeroMemory(vcpu, sizeof(struct __vcpu_t));
@@ -233,7 +234,7 @@ struct __vcpu_t* init_vcpu(void)
     vcpu->msr_bitmap = ExAllocatePoolWithTag(NonPagedPool, PAGE_SIZE, VMM_TAG);
     RtlSecureZeroMemory(vcpu->msr_bitmap, PAGE_SIZE);
     vcpu->msr_bitmap_physical = MmGetPhysicalAddress(vcpu->msr_bitmap).QuadPart;
-    DbgPrintEx(0, 0,"vcpu entry allocated successfully at %llX\n", vcpu);
+    Log("vcpu entry allocated successfully at %llX\n", vcpu);
     return vcpu;
 }
 void adjust_control_registers(void)
@@ -296,7 +297,7 @@ int init_vmxon(struct __vcpu_t* vcpu)
     vmxon = vcpu->vmxon;
     RtlSecureZeroMemory(vmxon, PAGE_SIZE);
     vmxon->header.all = vmx_basic.bits.vmcs_revision_identifier;
-        DbgPrintEx(0, 0, "VMXON for vcpu %d initialized:\n\t-> VA: %llX\n\t-> PA: %llX\n\t-> REV: %X\n",
+    Log("VMXON for vcpu %d initialized:\n\t-> VA: %llX\n\t-> PA: %llX\n\t-> REV: %X\n",
         KeGetCurrentProcessorNumber(),
         vcpu->vmxon,
         vcpu->vmxon_physical,
@@ -320,18 +321,18 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     log_debug("vcpu %d guest_rsp = %llX\n", processor_number, guest_rsp);
     adjust_control_registers();
     if (!check_vmx_support()) {
-        DbgPrintEx(0, 0, "VMX operation is not supported on this processor.\n");
+        Log("VMX operation is not supported on this processor.\n");
         //free_vmm_context(vmm_context);
         return;
     }
     if (!init_vmxon(vcpu)) {
-        DbgPrintEx(0, 0, "VMXON failed to initialize for vcpu %d.\n", processor_number);
+        Log("VMXON failed to initialize for vcpu %d.\n", processor_number);
        // free_vcpu(vcpu);
        // disable_vmx();
         return;
     }
     if (__vmx_on(&vcpu->vmxon_physical) != 0) {
-        DbgPrintEx(0, 0, "Failed to put vcpu %d into VMX operation.\n", KeGetCurrentProcessorNumber());
+        Log("Failed to put vcpu %d into VMX operation.\n", KeGetCurrentProcessorNumber());
       //  free_vcpu(vcpu);
       //  disable_vmx();
        // free_vmm_context(vmm_context);
@@ -345,10 +346,10 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     {
         UINT64 vmx_error; 
         __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
-        DbgPrint("vmlaunch failed: %u", vmx_error);
+        Log("vmlaunch failed: %u", vmx_error);
         // Some clean-up procedure
     }
 
-    DbgPrintEx(0, 0, "vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
+    Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
 }
 

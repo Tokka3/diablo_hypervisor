@@ -43,6 +43,7 @@
     <ConfigurationType>Driver</ConfigurationType>
     <DriverType>KMDF</DriverType>
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <TargetVersion>Windows10</TargetVersion>
@@ -115,6 +116,7 @@
     <ClCompile Include="core\init.c" />
     <ClCompile Include="core\vmexit.c" />
     <ClCompile Include="core\vmx.c" />
+    <ClCompile Include="Logger.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="segments\segments.c" />
     <ClCompile Include="vmcs\vmcs.c" />
@@ -132,6 +134,7 @@
     <ClInclude Include="headers\msr.h" />
     <ClInclude Include="headers\vmcs.h" />
     <ClInclude Include="headers\vmx.h" />
+    <ClInclude Include="logging.h" />
     <ClInclude Include="segments\segments.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />

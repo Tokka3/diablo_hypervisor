@@ -67,6 +67,9 @@
     <ClCompile Include="core\vmexit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Logger.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct_defs\cpuid.h">
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="struct_defs\vmexit_guest_registers.h">
       <Filter>struct_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="logging.h">
+      <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
