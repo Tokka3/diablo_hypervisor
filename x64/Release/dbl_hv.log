@@ -1,6 +1,9 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Release\dbl_hv.inf
-  Stamping [Version] section with DriverVer=11/28/2023,1.21.14.909
+  Stamping [Version] section with DriverVer=11/28/2023,1.35.1.730
+  logging.c
+  main.c
+  Generating Code...
   dbl_hv.vcxproj -> C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.sys
   Driver is 'Universal'.
   .........................

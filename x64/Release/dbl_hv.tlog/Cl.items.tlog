@@ -1,7 +1,7 @@
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\core\init.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\init.obj
+C:\Users\vsend\Documents\GitHub\diablo_hypervisor\core\logging.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\logging.obj
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\core\vmexit.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\vmexit.obj
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\core\vmx.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\vmx.obj
-C:\Users\vsend\Documents\GitHub\diablo_hypervisor\Logger.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\Logger.obj
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\main.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\main.obj
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\segments\segments.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\segments.obj
 C:\Users\vsend\Documents\GitHub\diablo_hypervisor\vmcs\vmcs.c;C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\vmcs.obj

@@ -114,9 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\init.c" />
+    <ClCompile Include="core\logging.c" />
     <ClCompile Include="core\vmexit.c" />
     <ClCompile Include="core\vmx.c" />
-    <ClCompile Include="Logger.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="segments\segments.c" />
     <ClCompile Include="vmcs\vmcs.c" />
@@ -131,10 +131,10 @@
     <ClInclude Include="encodings\vmexit\vm_exit_encodings.h" />
     <ClInclude Include="headers\includes.h" />
     <ClInclude Include="headers\init.h" />
+    <ClInclude Include="headers\logging.h" />
     <ClInclude Include="headers\msr.h" />
     <ClInclude Include="headers\vmcs.h" />
     <ClInclude Include="headers\vmx.h" />
-    <ClInclude Include="logging.h" />
     <ClInclude Include="segments\segments.h" />
     <ClInclude Include="struct_defs\control_registers.h" />
     <ClInclude Include="struct_defs\cpuid.h" />
