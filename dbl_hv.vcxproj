@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\init.c" />
+    <ClCompile Include="core\vmexit.c" />
     <ClCompile Include="core\vmx.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="segments\segments.c" />
@@ -138,6 +139,7 @@
     <ClInclude Include="struct_defs\feature_control.h" />
     <ClInclude Include="struct_defs\vcpu.h" />
     <ClInclude Include="struct_defs\vmcs_.h" />
+    <ClInclude Include="struct_defs\vmexit_guest_registers.h" />
     <ClInclude Include="struct_defs\vmm_context.h" />
     <ClInclude Include="struct_defs\vmx_basic.h" />
     <ClInclude Include="struct_defs\vmx_entry_ctl.h" />

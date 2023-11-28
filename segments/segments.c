@@ -2,10 +2,11 @@
 #include "../headers/includes.h"
 #include "../asm/vmm_intrin.h"
 
+#pragma warning (disable : 4333)
 #define SEGMENT_DESCRIPTOR_TYPE_TSS_AVAILABLE 0x9
 
 #define SEGMENT_DESCRIPTOR_TYPE_TSS_BUSY 0xB
-static unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector)
+ unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector)
 {
     union __segment_selector_t selector;
     union __segment_access_rights_t vmx_access_rights;
@@ -38,7 +39,7 @@ static unsigned __int32 read_segment_access_rights(unsigned __int16 segment_sele
     return vmx_access_rights.flags;
 }
 
-static unsigned __int64 get_segment_base(unsigned __int64 gdt_base, unsigned __int16 segment_selector)
+ unsigned __int64 get_segment_base(unsigned __int64 gdt_base, unsigned __int16 segment_selector)
 {
     unsigned __int64 segment_base;
     union __segment_selector_t selector;

@@ -23,6 +23,7 @@
 
 
 #define VMX_OK 0x0
+#define selector_mask 7
 
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp);
 
@@ -199,6 +200,20 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(GUEST_TR_BASE, get_segment_base(gdtr.base_address, __read_tr()));
 
 
+    __vmx_vmwrite(HOST_CS_SELECTOR, __read_cs() & ~selector_mask);
+    __vmx_vmwrite(HOST_SS_SELECTOR, __read_ss() & ~selector_mask);
+    __vmx_vmwrite(HOST_DS_SELECTOR, __read_ds() & ~selector_mask);
+    __vmx_vmwrite(HOST_ES_SELECTOR, __read_es() & ~selector_mask);
+    __vmx_vmwrite(HOST_FS_SELECTOR, __read_fs() & ~selector_mask);
+    __vmx_vmwrite(HOST_GS_SELECTOR, __read_gs() & ~selector_mask);
+    __vmx_vmwrite(HOST_TR_SELECTOR, __read_tr() & ~selector_mask);
+
+    __vmx_vmwrite(HOST_TR_BASE, get_segment_base(gdtr.base_address, __read_tr()));
+    __vmx_vmwrite(HOST_GS_BASE, get_segment_base(gdtr.base_address, __read_gs()));
+    __vmx_vmwrite(HOST_FS_BASE, get_segment_base(gdtr.base_address, __read_fs()));
+    __vmx_vmwrite(HOST_GDTR_BASE, gdtr.base_address);
+    __vmx_vmwrite(HOST_IDTR_BASE, idtr.base_address);
+   
 
     return TRUE;
 }
@@ -324,6 +339,16 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     }
 
     init_vmcs(vcpu, guest_rsp, guest_entry_stub, 0);
+
+   unsigned char status = __vmx_vmlaunch();
+    if (status != 0)
+    {
+        UINT64 vmx_error; 
+        __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
+        DbgPrint("vmlaunch failed: %u", vmx_error);
+        // Some clean-up procedure
+    }
+
     DbgPrintEx(0, 0, "vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
 }
 

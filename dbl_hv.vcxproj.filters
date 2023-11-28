@@ -64,6 +64,9 @@
     <ClCompile Include="segments\segments.c">
       <Filter>segments</Filter>
     </ClCompile>
+    <ClCompile Include="core\vmexit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct_defs\cpuid.h">
@@ -153,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="segments\segments.h">
       <Filter>segments</Filter>
+    </ClInclude>
+    <ClInclude Include="struct_defs\vmexit_guest_registers.h">
+      <Filter>struct_defs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -95,6 +95,6 @@ union __segment_access_rights_t
 };
 #endif
 
-static unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector);
+ unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector);
 
-static unsigned __int64 get_segment_base(unsigned __int64 gdt_base, unsigned __int16 segment_selector);
+ unsigned __int64 get_segment_base(unsigned __int64 gdt_base, unsigned __int16 segment_selector);
