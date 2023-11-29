@@ -20,7 +20,7 @@ struct __vmm_context_t* allocate_vmm_context(void)
     struct __vmm_context_t* vmm_context = NULL;
     vmm_context = (struct __vmm_context_t*)ExAllocatePoolWithTag(NonPagedPool, sizeof(struct __vmm_context_t), VMM_TAG);
     if (vmm_context == NULL) {
-        // log_error("Oops! vmm_context could not be allocated.\n");
+        Log("Oops! vmm_context could not be allocated.\n");
         return NULL;
     }
     vmm_context->processor_count = KeQueryActiveProcessorCountEx(ALL_PROCESSOR_GROUPS);
@@ -53,7 +53,7 @@ struct __vcpu_t* init_vcpu(void)
     vcpu->msr_bitmap = ExAllocatePoolWithTag(NonPagedPool, PAGE_SIZE, VMM_TAG);
     RtlSecureZeroMemory(vcpu->msr_bitmap, PAGE_SIZE);
     vcpu->msr_bitmap_physical = MmGetPhysicalAddress(vcpu->msr_bitmap).QuadPart;
-    Log("vcpu entry allocated successfully at %llX\n", vcpu);
+    Log( "vcpu entry allocated successfully at %llX\n", vcpu);
     return vcpu;
 }
 void adjust_control_registers(void)
@@ -85,6 +85,7 @@ int vmm_init(void)
         vmm_context->vcpu_table[iter] = init_vcpu();
         vmm_context->vcpu_table[iter]->vmm_context = vmm_context;
     }
+    Log("all vcpu's initiated \n ");
     for (unsigned iter = 0; iter < vmm_context->processor_count; iter++) {
         //
         // Convert from an index to a processor number.
@@ -93,8 +94,11 @@ int vmm_init(void)
         RtlSecureZeroMemory(&affinity, sizeof(GROUP_AFFINITY));
         affinity.Group = processor_number.Group;
         affinity.Mask = (KAFFINITY)1 << processor_number.Number;
+        Log("setting affinity\n");
         KeSetSystemGroupAffinityThread(&affinity, &old_affinity);
+        Log("initiating logical processor \n");
         init_logical_processor(vmm_context, 0);
+        Log("reverting affinity \n");
         KeRevertToUserGroupAffinityThread(&old_affinity);
     }
     return TRUE;
@@ -134,18 +138,10 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
          // free_vmm_context(vmm_context);
         return;
     }
+    Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
+   init_vmcs(vcpu, guest_rsp, /*guest_entry_stub ,*/ 0);
 
-  //  init_vmcs(vcpu, guest_rsp, guest_entry_stub, 0);
 
-
-    //unsigned char status = __vmx_vmlaunch();
-    //if (status != 0)
-    //{
-    //    UINT64 vmx_error;
-    //    __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
-    //    Log("vmlaunch failed: %u \n", vmx_error);
-    //    // Some clean-up procedure
-    //}
 
 
    unsigned char status = __vmx_vmlaunch();
@@ -153,10 +149,12 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     {
         UINT64 vmx_error; 
         __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
-        Log("vmlaunch failed: %u", vmx_error);
+        Log("vmlaunch failed: %u \n", vmx_error);
+
+        __vmx_off();
         // Some clean-up procedure
     }
     
 
-    Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
+  
 }

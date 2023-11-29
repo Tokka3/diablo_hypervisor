@@ -25,6 +25,7 @@
 #include "../encodings/control/control_encodings.h"
 
 #include "../headers/vmx.h"
+#include "../headers/vmcs.h"
 #include "../asm/vmm_intrin.h"
 
 #include "../segments/segments.h"

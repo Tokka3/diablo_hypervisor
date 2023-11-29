@@ -1,6 +1,6 @@
 #include "../headers/logging.h"
 
-VOID Log(const char* format, ...)
+VOID Log( const char* format, ...)
 {
   
     HANDLE fileHandle;
@@ -34,7 +34,5 @@ VOID Log(const char* format, ...)
         }
         ZwClose(fileHandle);
     }
-    LARGE_INTEGER interval;
-    interval.QuadPart = -(10 * 1000 * 1000) * 2;
-    KeDelayExecutionThread(KernelMode, FALSE, &interval);
+   
 }

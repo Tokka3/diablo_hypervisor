@@ -1,10 +1,6 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Debug\dbl_hv.inf
-  Stamping [Version] section with DriverVer=11/29/2023,16.55.32.595
-  init.c
-C:\Users\admin\source\repos\dbl_hv\dbl_hv\headers\vmexit.h(5,57): warning C4115: '__vmexit_guest_registers_t': named type definition in parentheses
-  (compiling source file 'core/init.c')
-  
+  Stamping [Version] section with DriverVer=11/29/2023,23.20.56.302
   dbl_hv.vcxproj -> C:\Users\admin\source\repos\dbl_hv\x64\Debug\dbl_hv.sys
   Driver is 'Universal'.
   .........................

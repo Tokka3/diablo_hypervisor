@@ -1,20 +1,33 @@
 #include "../headers/includes.h"
 
 
-int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int is_pt_allowed)
+#define IA32_DEBUGCTL_MSR 0x1D9
+#define IA32_SYSENTER_ESP_MSR 0x175
+#define IA32_SYSENTER_EIP_MSR 0x176
+#define IA32_SYSENTER_CS_MSR 0x174
+#define IA32_FS_BASE_MSR 0xC0000100
+#define IA32_GS_BASE_MSR 0xC0000101
+int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /* void (*guest_rip)() ,*/ int is_pt_allowed)
 {
+ 
 
     struct __vmcs_t* vmcs;
     union __vmx_basic_msr_t vmx_basic = { 0 };
     PHYSICAL_ADDRESS physical_max;
     vmx_basic.control = __readmsr(IA32_VMX_BASIC_MSR);
+
+
     physical_max.QuadPart = ~0ULL;
     vcpu->vmcs = MmAllocateContiguousMemory(PAGE_SIZE, physical_max);
+
     vcpu->vmcs_physical = MmGetPhysicalAddress(vcpu->vmcs).QuadPart;
+
     RtlSecureZeroMemory(vcpu->vmcs, PAGE_SIZE);
+
     vmcs = vcpu->vmcs;
     vmcs->header.all = vmx_basic.bits.vmcs_revision_identifier;
     vmcs->header.bits.shadow_vmcs_indicator = 0;
+  
 
     if (__vmx_vmclear(&vcpu->vmcs_physical) != VMX_OK || __vmx_vmptrld(&vcpu->vmcs_physical) != VMX_OK) {
         Log("Failed to clear or lead VMCS Physical Address\n");
@@ -24,20 +37,21 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     unsigned __int64 vmm_stack = (unsigned __int64)&vcpu->vmm_stack.vmm_context;
     //  interval.QuadPart = -(10 * 1000 * 1000) * 2;
 
-    Log("reading control registers");
+  
 
     // set up VMCS guest state with the proper data 
+
     if (__vmx_vmwrite(GUEST_CR0, __readcr0()) != 0) {
 
         Log("failed to write cr0");
 
     }
-
+  
     if (__vmx_vmwrite(GUEST_CR3, __readcr3()) != 0) {
         Log("failed to write cr3");
 
     }
-
+ 
     if (__vmx_vmwrite(GUEST_CR4, __readcr4()) != 0) {
         Log("failed to write cr4");
 
@@ -47,43 +61,40 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
         Log("failed to write dr7");
 
     }
-
+ 
     if (__vmx_vmwrite(GUEST_RSP, vcpu->guest_rsp) != 0) {
         Log("failed to write guest_rsp");
 
     }
 
-
+ 
     if (__vmx_vmwrite(GUEST_RIP, vcpu->guest_rip) != 0) {
         Log("failed to write guest_rip");
 
     }
 
-
     if (__vmx_vmwrite(GUEST_RFLAGS, __readeflags()) != 0) {
         Log("failed to write guest_rflags");
 
-    }
-
-    if (__vmx_vmwrite(GUEST_DEBUG_CONTROL, __readmsr(GUEST_DEBUG_CONTROL)) != 0) {
+    }   
+    if (__vmx_vmwrite(GUEST_DEBUG_CONTROL, __readmsr(IA32_DEBUGCTL_MSR)) != 0) {
         Log("failed to write guest_debug_control");
 
     }
 
 
-    if (__vmx_vmwrite(GUEST_SYSENTER_ESP, __readmsr(GUEST_SYSENTER_ESP)) != 0) {
+    if (__vmx_vmwrite(GUEST_SYSENTER_ESP, __readmsr(IA32_SYSENTER_ESP_MSR)) != 0) {
         Log("failed to write guest_sysenter_esp");
 
     }
+  
 
-
-    if (__vmx_vmwrite(GUEST_SYSENTER_EIP, __readmsr(GUEST_SYSENTER_EIP)) != 0) {
+    if (__vmx_vmwrite(GUEST_SYSENTER_EIP, __readmsr(IA32_SYSENTER_EIP_MSR)) != 0) {
         Log("failed to write guest_sysenter EIP");
 
     }
 
-
-    if (__vmx_vmwrite(GUEST_SYSENTER_CS, __readmsr(GUEST_SYSENTER_CS)) != 0) {
+    if (__vmx_vmwrite(GUEST_SYSENTER_CS, __readmsr(IA32_SYSENTER_CS_MSR)) != 0) {
         Log("failed to write guest_sysenter_cs");
 
     }
@@ -94,14 +105,13 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
 
     }
 
-
-    if (__vmx_vmwrite(GUEST_FS_BASE, __readmsr(GUEST_FS_BASE)) != 0) {
+    if (__vmx_vmwrite(GUEST_FS_BASE, __readmsr(IA32_FS_BASE_MSR)) != 0) {
         Log("failed to write guest_debug_control");
 
     }
 
 
-    if (__vmx_vmwrite(GUEST_GS_BASE, __readmsr(GUEST_GS_BASE)) != 0) {
+    if (__vmx_vmwrite(GUEST_GS_BASE, __readmsr(IA32_GS_BASE_MSR)) != 0) {
         Log("failed to write guest_debug_control");
 
     }
@@ -186,7 +196,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
 
     }
 
-    Log("adjusting controls \n");
+
 
     __vmx_vmwrite(GUEST_CS_SELECTOR, __read_cs());
     __vmx_vmwrite(GUEST_SS_SELECTOR, __read_ss());
@@ -197,7 +207,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(GUEST_LDTR_SELECTOR, __read_ldtr());
     __vmx_vmwrite(GUEST_TR_SELECTOR, __read_tr());
 
-    Log("reading selectors \n");
+
     struct __pseudo_descriptor_64_t gdtr;
     struct __pseudo_descriptor_64_t idtr;
 
@@ -209,7 +219,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
 
     __vmx_vmwrite(GUEST_GDTR_BASE, gdtr.base_address);
     __vmx_vmwrite(GUEST_IDTR_BASE, idtr.base_address);
-    Log("initialising guest bases \n");
+
 
     __vmx_vmwrite(GUEST_CS_ACCESS_RIGHTS, read_segment_access_rights(__read_cs()));
     __vmx_vmwrite(GUEST_SS_ACCESS_RIGHTS, read_segment_access_rights(__read_ss()));
@@ -232,7 +242,6 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, void (*guest_rip)(), int i
     __vmx_vmwrite(HOST_GS_SELECTOR, __read_gs() & ~selector_mask);
     __vmx_vmwrite(HOST_TR_SELECTOR, __read_tr() & ~selector_mask);
 
-    Log("writing selectors \n");
 
     __vmx_vmwrite(HOST_TR_BASE, get_segment_base(gdtr.base_address, __read_tr()));
     __vmx_vmwrite(HOST_GS_BASE, get_segment_base(gdtr.base_address, __read_gs()));

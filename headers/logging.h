@@ -3,4 +3,4 @@
 #include <stdarg.h>
 #include <ntddk.h>
 
-VOID Log(const char* format, ...);
+VOID Log( const char* format, ...);
