@@ -137,6 +137,7 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
 
   //  init_vmcs(vcpu, guest_rsp, guest_entry_stub, 0);
 
+
     //unsigned char status = __vmx_vmlaunch();
     //if (status != 0)
     //{
@@ -145,6 +146,17 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     //    Log("vmlaunch failed: %u \n", vmx_error);
     //    // Some clean-up procedure
     //}
+
+
+   unsigned char status = __vmx_vmlaunch();
+    if (status != 0)
+    {
+        UINT64 vmx_error; 
+        __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
+        Log("vmlaunch failed: %u", vmx_error);
+        // Some clean-up procedure
+    }
+    
 
     Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
 }
