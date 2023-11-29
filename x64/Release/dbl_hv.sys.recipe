@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\admin\source\repos\dbl_hv\x64\Release\dbl_hv.sys</FullPath>
+      <FullPath>C:\Users\vsend\Documents\GitHub\diablo_hypervisor_2\x64\Release\dbl_hv.sys</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

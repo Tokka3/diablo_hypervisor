@@ -1,7 +1,6 @@
 
 #include "../headers/includes.h"
-
-
+#define CR4_VMX_ENABLE_BIT                                           13
 void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp);
 
 int check_vmx_support() {
@@ -10,9 +9,6 @@ int check_vmx_support() {
     __cpuid(cpuid.cpu_info, 1);
     return cpuid.feature_ecx.virtual_machine_extensions;
 };
-
-
-
 
 struct __vmm_context_t* allocate_vmm_context(void)
 {
@@ -56,6 +52,16 @@ struct __vcpu_t* init_vcpu(void)
     Log( "vcpu entry allocated successfully at %llX\n", vcpu);
     return vcpu;
 }
+void enable_vmx(void)
+{
+    unsigned long long cr4 = __readcr4();
+
+    Log("vmxenable: %u\n", (cr4 >> CR4_VMX_ENABLE_BIT) & 0x01);
+
+    cr4 |= (1 << CR4_VMX_ENABLE_BIT);
+
+    __writecr4(cr4);
+}
 void adjust_control_registers(void)
 {
     union __cr4_t cr4 = { 0 };
@@ -73,7 +79,9 @@ void adjust_control_registers(void)
     cr_fixed.all = __readmsr(IA32_VMX_CR4_FIXED1);
     cr4.control &= cr_fixed.split.low;
     __writecr4(cr4.control);
+    Log("adjust_control_registers\n");
 }
+
 int vmm_init(void)
 {
     struct __vmm_context_t* vmm_context;
@@ -87,18 +95,14 @@ int vmm_init(void)
     }
     Log("all vcpu's initiated \n ");
     for (unsigned iter = 0; iter < vmm_context->processor_count; iter++) {
-        //
-        // Convert from an index to a processor number.
-        //
         KeGetProcessorNumberFromIndex(iter, &processor_number);
         RtlSecureZeroMemory(&affinity, sizeof(GROUP_AFFINITY));
         affinity.Group = processor_number.Group;
         affinity.Mask = (KAFFINITY)1 << processor_number.Number;
-        Log("setting affinity\n");
         KeSetSystemGroupAffinityThread(&affinity, &old_affinity);
-        Log("initiating logical processor \n");
+
         init_logical_processor(vmm_context, 0);
-        Log("reverting affinity \n");
+
         KeRevertToUserGroupAffinityThread(&old_affinity);
     }
     return TRUE;
@@ -118,32 +122,36 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
     processor_number = KeGetCurrentProcessorNumber();
     vmm_context = (struct __vmm_context_t*)context;
     vcpu = vmm_context->vcpu_table[processor_number];
-    Log("vcpu %d guest_rsp = %llX\n", processor_number, guest_rsp);
+    
+    //Log("vcpu %d guest_rsp = %llX\n", processor_number, guest_rsp);
+
+    enable_vmx(); // should have been doing this the whole time!!!!!
+
     adjust_control_registers();
+    
     if (!check_vmx_support()) {
         Log("VMX operation is not supported on this processor.\n");
         //free_vmm_context(vmm_context);
         return;
     }
-    if (!init_vmxon(vcpu)) {
+    if (!init_vmxon(vcpu, processor_number)) {
         Log("VMXON failed to initialize for vcpu %d.\n", processor_number);
         // free_vcpu(vcpu);
         // disable_vmx();
         return;
     }
     if (__vmx_on(&vcpu->vmxon_physical) != 0) {
-        Log("Failed to put vcpu %d into VMX operation.\n", KeGetCurrentProcessorNumber());
-        //  free_vcpu(vcpu);
+        Log("Failed to put vcpu %d into VMX operation.\n", processor_number);
+          //free_vcpu(vcpu);
         //  disable_vmx();
          // free_vmm_context(vmm_context);
         return;
     }
-    Log("vcpu %d is now in VMX operation.\n", KeGetCurrentProcessorNumber());
-   init_vmcs(vcpu, guest_rsp, /*guest_entry_stub ,*/ 0);
-
-
-
-
+    Log("vcpu %d is now in VMX operation.\n", processor_number);
+    
+   init_vmcs(vcpu, guest_rsp, 0);
+   
+   
    unsigned char status = __vmx_vmlaunch();
     if (status != 0)
     {
@@ -153,8 +161,5 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
 
         __vmx_off();
         // Some clean-up procedure
-    }
-    
-
-  
+    }  
 }

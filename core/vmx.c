@@ -26,7 +26,7 @@ int enable_vmx_operation(void)
     return FALSE;
 }
 
-int init_vmxon(struct __vcpu_t* vcpu)
+int init_vmxon(struct __vcpu_t* vcpu, unsigned long processor_number)
 {
     union __vmx_basic_msr_t vmx_basic = { 0 };
     struct __vmcs_t* vmxon;
@@ -43,7 +43,7 @@ int init_vmxon(struct __vcpu_t* vcpu)
     RtlSecureZeroMemory(vmxon, PAGE_SIZE);
     vmxon->header.all = vmx_basic.bits.vmcs_revision_identifier;
     Log("VMXON for vcpu %d initialized:\n\t-> VA: %llX\n\t-> PA: %llX\n\t-> REV: %X\n",
-        KeGetCurrentProcessorNumber(),
+        processor_number,
         vcpu->vmxon,
         vcpu->vmxon_physical,
         vcpu->vmxon->header.all);

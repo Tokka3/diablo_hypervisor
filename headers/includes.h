@@ -1,10 +1,10 @@
 #pragma once
 
+#include <ntifs.h>
 #include <ntddk.h>
 #include <wdf.h>
 #include <wdm.h>
 #include <intrin.h>
-
 
 #include "../headers/logging.h"
 #include "../headers/includes.h"
@@ -30,7 +30,7 @@
 
 #include "../segments/segments.h"
 #define VMX_OK 0x0
-#define selector_mask 7
+#define selector_mask 0x7
 
 #pragma warning (disable: 4996)
 #pragma warning(disable: 4100)

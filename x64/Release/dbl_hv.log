@@ -1,18 +1,8 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Release\dbl_hv.inf
-<<<<<<< HEAD
-  Stamping [Version] section with DriverVer=11/28/2023,20.53.54.903
-  logging.c
-  dbl_hv.vcxproj -> C:\Users\admin\source\repos\dbl_hv\x64\Release\dbl_hv.sys
+  Stamping [Version] section with DriverVer=11/29/2023,14.45.53.5
+  dbl_hv.vcxproj -> C:\Users\vsend\Documents\GitHub\diablo_hypervisor_2\x64\Release\dbl_hv.sys
   Driver is 'Universal'.
-=======
-  Stamping [Version] section with DriverVer=11/28/2023,3.17.34.274
-C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(559,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\stampinf.command.1.tlog" being invalid.
-  init.c
-  dbl_hv.vcxproj -> C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.sys
-  Driver is 'Universal'.
-C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(1362,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\Inf2Cat.command.1.tlog" being invalid.
->>>>>>> 7e9c87aa01cebaec3d4e634f2c4095fa4e9b035e
   .........................
   Signability test complete.
   
@@ -23,9 +13,4 @@ C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.t
   None
   
   Catalog generation complete.
-<<<<<<< HEAD
-  C:\Users\admin\source\repos\dbl_hv\x64\Release\dbl_hv\dbl_hv.cat
-=======
-  C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv\dbl_hv.cat
-C:\Program Files (x86)\Windows Kits\10\build\10.0.22621.0\WindowsDriver.common.targets(1362,5): warning MSB8015: Forcing a rebuild of all source files due to the contents of "C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.tlog\Inf2Cat.command.1.tlog" being invalid.
->>>>>>> 7e9c87aa01cebaec3d4e634f2c4095fa4e9b035e
+  C:\Users\vsend\Documents\GitHub\diablo_hypervisor_2\x64\Release\dbl_hv\dbl_hv.cat

@@ -20,4 +20,4 @@
          
  int enable_vmx_operation(void);
 
- int init_vmxon(struct __vcpu_t* vcpu);
+ int init_vmxon(struct __vcpu_t* vcpu, unsigned long processor_number);

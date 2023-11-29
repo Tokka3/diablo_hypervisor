@@ -1,2 +1,1 @@
-C:\Users\vsend\Documents\GitHub\diablo_hypervisor\x64\Release\dbl_hv.sys
-C:\Users\admin\source\repos\dbl_hv\dbl_hv\x64\Release\dbl_hv.sys
+C:\Users\vsend\Documents\GitHub\diablo_hypervisor_2\x64\Release\dbl_hv.sys
