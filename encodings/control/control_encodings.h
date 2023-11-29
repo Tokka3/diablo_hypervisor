@@ -1,4 +1,6 @@
 #include "../../util/encoding.h"
+#ifndef VMCS_STATE_ENCODINGS_H
+#define VMCS_STATE_ENCODINGS_H
 
 enum __vmcs_fields_control_e
 {
@@ -83,3 +85,5 @@ enum __vmcs_fields_control_e
     CTRL_CR3_TARGET_VALUE_2 = VMCS_ENCODE_COMPONENT_FULL(control, natural, 6),
     CTRL_CR3_TARGET_VALUE_3 = VMCS_ENCODE_COMPONENT_FULL(control, natural, 7),
 };
+
+#endif

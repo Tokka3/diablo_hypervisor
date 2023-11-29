@@ -2,6 +2,8 @@
 #include "vmcs_.h"
 #include "vmm_context.h"
 
+#ifndef VCPU_H
+#define VCPU_H
 struct __vcpu_t
 {
     struct __vmm_context_t* vmm_context;
@@ -20,3 +22,4 @@ struct __vcpu_t
 
     __declspec(align(4096)) struct __vmm_stack_t vmm_stack;
 };
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef IA32_FEATURE_CONTROL_H
+#define IA32_FEATURE_CONTROL_H
 #define IA32_FEATURE_CONTROL 0x3a
 union __ia32_feature_control_msr_t
 {
@@ -20,3 +22,4 @@ union __ia32_feature_control_msr_t
         unsigned __int64 system_reserved : 42;
     } bits;
 };
+#endif

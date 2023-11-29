@@ -16,17 +16,17 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver_obj, PUNICODE_STRING reg_path) {
 
 	UNREFERENCED_PARAMETER(reg_path);
 	UNREFERENCED_PARAMETER(driver_obj);
-<<<<<<< HEAD
+
 	
-	DbgPrintEx(0, 0, "[+] Driver Entry Called");
-=======
+	DbgPrintEx(0, 0, "[+] Driva Entry Called");
+
 	//driver_obj->DriverUnload = DriverUnload;
 	Log("[+] Driver Entry Called\n");
->>>>>>> 39480f58b2c86e7d0ab99a8e79d1f9697523e80d
+
 	
 	if (check_vmx_support()) {
 		Log("[+] VMX Supported\n");
-		//vmm_init();
+		vmm_init();
 		
 	}
 	else {

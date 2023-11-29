@@ -166,6 +166,9 @@
     <ClInclude Include="headers\logging.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="headers\vmexit.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\vmm_intrin.asm">

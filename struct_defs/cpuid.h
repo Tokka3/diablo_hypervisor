@@ -1,5 +1,8 @@
 #pragma once
 #pragma warning(disable : 4201)
+
+#ifndef CPUID_H
+#define CPUID_H
 typedef union __cpuid_t {
     int cpu_info[4]; // eax, ebx, ecx, edx
     struct {
@@ -23,3 +26,5 @@ typedef union __cpuid_t {
         unsigned int edx;
     };
 } __cpuid_t;
+
+#endif

@@ -1,4 +1,9 @@
 #include "../../util/encoding.h"
+
+#ifndef GUEST_STATE_ENCODINGS_H
+#define GUEST_STATE_ENCODINGS_H
+
+
 enum __vmcs_fields_guest_e
 {
     //natural guest register state fields
@@ -77,3 +82,5 @@ enum __vmcs_fields_guest_e
 
     // field encoding inserted here.
 };
+
+#endif // !GUEST_STATE_ENCODINGS_H

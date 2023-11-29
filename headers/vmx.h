@@ -18,3 +18,6 @@
 
  void vmx_adjust_pinbased_controls(union __vmx_pinbased_control_msr_t* pinbased_controls);
          
+ int enable_vmx_operation(void);
+
+ int init_vmxon(struct __vcpu_t* vcpu);

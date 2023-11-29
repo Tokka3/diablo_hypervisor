@@ -1,5 +1,8 @@
 #include "../../util/encoding.h"
 
+#ifndef HOST_STATE_ENCODINGS_H
+#define HOST_STATE_ENCODINGS_H
+
 enum __vmcs_fields_host_e
 {
 
@@ -37,4 +40,6 @@ enum __vmcs_fields_host_e
    
 
 };
+
+#endif
 

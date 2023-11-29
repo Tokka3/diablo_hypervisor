@@ -3,6 +3,8 @@
 // Segment Selector Intrinsics
 //
 
+#include "../headers/vmexit.h"
+
 #ifndef ASM_DEFS
 #define ASM_DEFS
 

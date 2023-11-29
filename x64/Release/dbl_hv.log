@@ -1,1 +1,17 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(30,3): error MSB4024: The imported project file "C:\Users\admin\source\repos\dbl_hv\dbl_hv\dbl_hv.vcxproj.user" could not be loaded. Name cannot begin with the '<' character, hexadecimal value 0x3C. Line 6, position 2.
+﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Release\dbl_hv.inf
+  Stamping [Version] section with DriverVer=11/28/2023,20.53.54.903
+  logging.c
+  dbl_hv.vcxproj -> C:\Users\admin\source\repos\dbl_hv\x64\Release\dbl_hv.sys
+  Driver is 'Universal'.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\admin\source\repos\dbl_hv\x64\Release\dbl_hv\dbl_hv.cat
