@@ -163,10 +163,13 @@
     <ClInclude Include="struct_defs\vmexit_guest_registers.h">
       <Filter>struct_defs</Filter>
     </ClInclude>
-    <ClInclude Include="headers\logging.h">
+    <ClInclude Include="headers\vmexit.h">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="headers\vmexit.h">
+    <ClInclude Include="headers\ia32_defs.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\logging.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

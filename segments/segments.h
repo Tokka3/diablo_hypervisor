@@ -1,79 +1,18 @@
-#ifndef SEGMENT_DEF
-#define SEGMENT_DEF
+#ifndef SEGMENT_H
+#define SEGMENT_H
 
-#pragma warning (disable : 4201)
-#pragma pack(push, 1)
-
-
-struct __pseudo_descriptor_64_t
+#pragma once
+enum __segment_registers
 {
-	unsigned __int16 limit;
-	unsigned __int64 base_address;
+    ES = 0,
+    CS,
+    SS,
+    DS,
+    FS,
+    GS,
+    LDTR,
+    TR
 };
-#pragma pack(pop)
-
-
-struct __segment_descriptor_64_t
-{
-    unsigned __int16 segment_limit_low;
-    unsigned __int16 base_low;
-    union
-    {
-        struct
-        {
-            unsigned __int32 base_middle : 8;
-            unsigned __int32 type : 4;
-            unsigned __int32 descriptor_type : 1;
-            unsigned __int32 dpl : 2;
-            unsigned __int32 present : 1;
-            unsigned __int32 segment_limit_high : 4;
-            unsigned __int32 system : 1;
-            unsigned __int32 long_mode : 1;
-            unsigned __int32 default_big : 1;
-            unsigned __int32 granularity : 1;
-            unsigned __int32 base_high : 8;
-        };
-        unsigned __int32 flags;
-    };
-    unsigned __int32 base_upper;
-    unsigned __int32 reserved;
-};
-
-struct __segment_descriptor_32_t
-{
-  unsigned __int16 segment_limit_low;
-  unsigned __int16 base_low;
-  union
-  {
-    struct
-    {
-      unsigned __int32 base_middle : 8;
-      unsigned __int32 type : 4;
-      unsigned __int32 descriptor_type : 1;
-      unsigned __int32 dpl : 2;
-      unsigned __int32 present : 1;
-      unsigned __int32 segment_limit_high : 4;
-      unsigned __int32 system : 1;
-      unsigned __int32 long_mode : 1;
-      unsigned __int32 default_big : 1;
-      unsigned __int32 granularity : 1;
-      unsigned __int32 base_high : 8;
-    };
-    unsigned __int32 flags;
-  };
-};
-
-union __segment_selector_t
-{
-    struct
-    {
-        unsigned __int16 rpl : 2;
-        unsigned __int16 table : 1;
-        unsigned __int16 index : 13;
-    };
-    unsigned __int16 flags;
-};
-
 
 union __segment_access_rights_t
 {
@@ -91,10 +30,65 @@ union __segment_access_rights_t
         unsigned __int32 unusable : 1;
         unsigned __int32 reserved1 : 15;
     };
-    unsigned __int32 flags;
+
+    unsigned __int32 all;
 };
+
+struct __segment_descriptor
+{
+    unsigned __int16 limit_low;
+    unsigned __int16 base_low;
+    union
+    {
+        struct
+        {
+            unsigned __int32 base_middle : 8;
+            unsigned __int32 type : 4;
+            unsigned __int32 descriptor_type : 1;
+            unsigned __int32 dpl : 2;
+            unsigned __int32 present : 1;
+            unsigned __int32 segment_limit_high : 4;
+            unsigned __int32 system : 1;
+            unsigned __int32 long_mode : 1;
+            unsigned __int32 default_big : 1;
+            unsigned __int32 granularity : 1;
+            unsigned __int32 base_high : 8;
+        };
+    };
+
+    unsigned __int32 base_upper;
+    unsigned __int32 reserved;
+};
+
+union __segment_selector
+{
+    unsigned short all;
+    struct
+    {
+        unsigned short rpl : 2;
+        unsigned short ti : 1;
+        unsigned short index : 13;
+    };
+};
+
+#pragma pack(push, 1)
+struct __pseudo_descriptor64
+{
+    unsigned __int16 limit;
+    unsigned __int64 base_address;
+};
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+struct __pseudo_descriptor32
+{
+    unsigned __int16 limit;
+    unsigned __int32 base_address;
+};
+#pragma pack(pop)
+
 #endif
 
- unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector);
+unsigned __int64 get_segment_base(unsigned __int8* gdt_base, unsigned __int16 selector);
 
- unsigned __int64 get_segment_base(unsigned __int64 gdt_base, unsigned __int16 segment_selector);
+unsigned __int32 read_segment_access_rights(unsigned __int16 segment_selector);

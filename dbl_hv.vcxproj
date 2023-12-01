@@ -144,6 +144,7 @@
     <ClInclude Include="encodings\guest_state\guest_state_encodings.h" />
     <ClInclude Include="encodings\host_state\host_state_encodings.h" />
     <ClInclude Include="encodings\vmexit\vm_exit_encodings.h" />
+    <ClInclude Include="headers\ia32_defs.h" />
     <ClInclude Include="headers\includes.h" />
     <ClInclude Include="headers\init.h" />
     <ClInclude Include="headers\logging.h" />

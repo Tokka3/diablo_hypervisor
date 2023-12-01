@@ -5,7 +5,7 @@
 
 union __vmx_basic_msr_t
 {
-    unsigned __int64 control;
+    unsigned __int64 all;
     struct
     {
         unsigned __int64 vmcs_revision_identifier : 31;
@@ -17,7 +17,7 @@ union __vmx_basic_msr_t
         unsigned __int64 memory_type : 4;
         unsigned __int64 io_instruction_reporting : 1;
         unsigned __int64 true_controls : 1;
-    } bits;
+    }bits;
 };
 
 #endif

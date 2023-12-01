@@ -1,1 +1,0 @@
-C:\Users\vsend\Documents\GitHub\diablo_hypervisor_2\x64\Release\dbl_hv.sys

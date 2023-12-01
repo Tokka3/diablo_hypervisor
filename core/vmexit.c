@@ -10,7 +10,7 @@ BOOLEAN vmexit_handler(struct __vmexit_guest_registers_t* guest_registers)
 {
 
   
-    Log( 0, "vm exit handler called");
+    LogDelay("vm exit handler called");
   //  DbgBreakPointWithStatus(STATUS_BREAKPOINT);
 
 

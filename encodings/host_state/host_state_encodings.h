@@ -17,9 +17,9 @@ enum __vmcs_fields_host_e
     HOST_TR_SELECTOR = VMCS_ENCODE_COMPONENT_FULL_16(host, 6),
 
     //32 bit host-state field 
-    
+
     HOST_SYSENTER_CS = VMCS_ENCODE_COMPONENT_FULL_32(host, 0),
-    
+
     // natural host-state fields
 
     HOST_CR0 = VMCS_ENCODE_COMPONENT_FULL(host, natural, 0),
@@ -37,7 +37,13 @@ enum __vmcs_fields_host_e
     HOST_IA32_S_CET = VMCS_ENCODE_COMPONENT_FULL(host, natural, 12),
     HOST_SSP = VMCS_ENCODE_COMPONENT_FULL(host, natural, 13),
     HOST_INTERRUPT_SSP_TABLE_ADDR = VMCS_ENCODE_COMPONENT_FULL(host, natural, 14),
-   
+
+    //64 host-state fields
+
+    HOST_IA32_PAT = VMCS_ENCODE_COMPONENT_FULL_64(host, 0),
+    HOST_IA32_EFER = VMCS_ENCODE_COMPONENT_FULL_64(host, 1),
+    HOST_IA32_PERF_GLOBAL_CTRL = VMCS_ENCODE_COMPONENT_FULL_64(host, 2),
+    HOST_IA32_PKRS = VMCS_ENCODE_COMPONENT_FULL_64(host, 3),
 
 };
 

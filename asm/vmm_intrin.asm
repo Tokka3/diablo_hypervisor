@@ -93,7 +93,7 @@ RESTORE_GP macro
 endm
 
 
-vmm_entrypoint proc
+entrypoint proc
         SAVE_GP
         sub     rsp, 68h
         movaps  xmmword ptr [rsp +  0h], xmm0
@@ -130,6 +130,6 @@ exit:
         ret
 vmerror:
         int 3
-vmm_entrypoint endp
+entrypoint endp
 
 END

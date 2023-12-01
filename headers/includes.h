@@ -30,7 +30,7 @@
 
 #include "../segments/segments.h"
 #define VMX_OK 0x0
-#define selector_mask 0x7
+#define selector_mask 0xF8
 
 #pragma warning (disable: 4996)
 #pragma warning(disable: 4100)

@@ -2,7 +2,7 @@
 
 union __vmx_secondary_processor_based_control_t
 {
-    unsigned __int64 control;
+    unsigned __int64 all;
     struct
     {
         unsigned __int64 virtualize_apic_accesses : 1;
@@ -28,7 +28,10 @@ union __vmx_secondary_processor_based_control_t
         unsigned __int64 enable_xsave_xrstor : 1;
         unsigned __int64 reserved_0 : 1;
         unsigned __int64 mode_based_execute_control_ept : 1;
-        unsigned __int64 reserved_1 : 2;
+        unsigned __int64 sub_page_write_permission_for_ept : 1;
+        unsigned __int64 intel_pt_uses_guest_physical_address : 1;
         unsigned __int64 use_tsc_scaling : 1;
-    } bits;
+        unsigned __int64 enable_user_wait_and_pause : 1;
+        unsigned __int64 enable_enclv_exiting : 1;
+    }bits;
 };
