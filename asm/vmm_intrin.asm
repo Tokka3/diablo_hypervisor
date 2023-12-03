@@ -94,6 +94,7 @@ endm
 
 
 entrypoint proc
+        int 3
         SAVE_GP
         sub     rsp, 68h
         movaps  xmmword ptr [rsp +  0h], xmm0

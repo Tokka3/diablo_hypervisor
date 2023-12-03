@@ -18,7 +18,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT driver_obj, PUNICODE_STRING reg_path) {
 	UNREFERENCED_PARAMETER(driver_obj);
 
 	Log("[+] Driver Entry Called\n");
-
+	__debugbreak();
 	if (check_vmx_support()) {
 		Log("[+] VMX Supported\n");
 		vmm_init();		

@@ -147,21 +147,24 @@ void init_logical_processor(struct __vmm_context_t* context, void* guest_rsp)
          // free_vmm_context(vmm_context);
         return;
     }
-    LogDelay("vcpu %d is now in VMX operation.\n", processor_number);
+    Log("vcpu %d is now in VMX operation.\n", processor_number);
     
+ 
    init_vmcs(vcpu, guest_rsp, 0);
    
+   Log("attempting vm launch \n");
+   __debugbreak();
    
-   //unsigned char status = __vmx_vmlaunch();
-   // if (status != 0)
-   // {
-   //     UINT64 vmx_error; 
-   //     __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
-   //     LogDelay("vmlaunch failed: %u \n", vmx_error);
+   unsigned char status = __vmx_vmlaunch();
+    if (status != 0)
+    {
+        UINT64 vmx_error; 
+        __vmx_vmread(VM_EXIT_VM_INSTRUCTION_ERROR, &vmx_error);
+        Log("vmlaunch failed: %u \n", vmx_error);
 
-   //     __vmx_off();
-   //     // Some clean-up procedure
-   // }
+        __vmx_off();
+        // Some clean-up procedure
+    }
    // else {
    //     LogDelay("vmlaunch success");
    // }

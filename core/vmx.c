@@ -7,7 +7,7 @@
 #define IA32_VMX_EXIT_CTLS 0x483
 
 
-
+#define _MINIMAL
 int enable_vmx_operation(void)
 {
     union __cr4_t cr4 = { 0 };
@@ -290,7 +290,7 @@ int init_vmxon(struct __vcpu_t* vcpu, unsigned long processor_number)
 #ifdef _MINIMAL
 	 secondary_controls->bits.descriptor_table_exiting = false;
 #else
-	 secondary_controls->bits.descriptor_table_exiting = true;
+	 secondary_controls->bits.descriptor_table_exiting = false;
 #endif
 
 	 /**

@@ -2,6 +2,7 @@
 
 VOID Log( const char* format, ...)
 {
+    DbgPrintEx(0, 0, format);
   
     HANDLE fileHandle;
     UNICODE_STRING fileName;
@@ -40,7 +41,7 @@ VOID Log( const char* format, ...)
 
 VOID LogDelay(const char* format, ...)
 {
-
+    DbgPrintEx(0, 0, format);
     HANDLE fileHandle;
     UNICODE_STRING fileName;
     IO_STATUS_BLOCK ioStatusBlock;

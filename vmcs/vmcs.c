@@ -1,5 +1,7 @@
 #include "../headers/includes.h"
 #include "../headers/ia32_defs.h"
+#include "../asm/vm_exit.h"
+
 
 #define IA32_DEBUGCTL_MSR 0x1D9
 #define IA32_SYSENTER_ESP_MSR 0x175
@@ -42,7 +44,8 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /* void (*guest_rip)() ,*/
       union  __vmx_primary_processor_based_control_t primary_controls = { 0 };
       union  __vmx_secondary_processor_based_control_t secondary_controls = { 0 };
 
-
+      Log("vmcs init called \n");
+      __debugbreak();
       set_entry_control(&entry_controls);
 
       set_exit_control(&exit_controls);
@@ -115,8 +118,22 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /* void (*guest_rip)() ,*/
     __vmx_vmwrite(VMCS_CTRL_CR3_TARGET_COUNT, 0);
     __vmx_vmwrite(VMCS_CTRL_CR0_READ_SHADOW, __readcr0());
     __vmx_vmwrite(VMCS_CTRL_CR4_READ_SHADOW, __readcr4() & -0x2000);
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_INTERRUPTION_INFORMATION_FIELD, 0);
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_EXCEPTION_ERROR_CODE, 0);
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_INSTRUCTION_LENGTH, 0);
   //  __vmx_vmwrite(VMCS_CTRL_VIRTUAL_PROCESSOR_IDENTIFIER, KeGetCurrentProcessorNumberEx(NULL) + 1);
 
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_INTERRUPTION_INFORMATION_FIELD, 0);
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_EXCEPTION_ERROR_CODE, 0);
+    __vmx_vmwrite(VMCS_CTRL_VMENTRY_INSTRUCTION_LENGTH, 0);
+
+    // 3.24.7.2
+    __vmx_vmwrite(VMCS_CTRL_VMEXIT_MSR_LOAD_COUNT, 0);
+    __vmx_vmwrite(VMCS_CTRL_VMEXIT_MSR_LOAD_ADDRESS, 0);
+
+    // vm-exit on every CR0/CR4 modification
+    __vmx_vmwrite(VMCS_CTRL_CR0_GUEST_HOST_MASK, 0xFFFFFFFF'FFFFFFFF);
+    __vmx_vmwrite(VMCS_CTRL_CR4_GUEST_HOST_MASK, 0xFFFFFFFF'FFFFFFFF);
 
     __vmx_vmwrite(VMCS_GUEST_CS_SELECTOR, __read_cs());
     __vmx_vmwrite(VMCS_GUEST_SS_SELECTOR, __read_ss());
@@ -177,7 +194,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /* void (*guest_rip)() ,*/
     __vmx_vmwrite(VMCS_HOST_IDTR_BASE, idtr.base_address);
 
     __vmx_vmwrite(VMCS_HOST_RSP, ((ULONG64)vmm_stack + VMM_STACK_SIZE));
-    __vmx_vmwrite(VMCS_HOST_RIP, (ULONG64)entrypoint);
+    __vmx_vmwrite(VMCS_HOST_RIP, (ULONG64)(entrypoint));
 
   
     
@@ -218,7 +235,7 @@ int init_vmcs(struct __vcpu_t* vcpu, void* guest_rsp, /* void (*guest_rip)() ,*/
     host_pat.pa7 = MEMORY_TYPE_UNCACHEABLE;
     __vmx_vmwrite(VMCS_HOST_PAT, host_pat.flags);
 
-    LogDelay("vmcs initiated \n");
+    Log("vmcs initiated \n");
 
     return TRUE;
 }

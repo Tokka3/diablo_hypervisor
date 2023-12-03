@@ -70,6 +70,9 @@
     <ClCompile Include="core\logging.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="asm\vm_exit_source.c">
+      <Filter>asm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="struct_defs\cpuid.h">
@@ -172,9 +175,18 @@
     <ClInclude Include="headers\logging.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="asm\guest-context.h">
+      <Filter>asm</Filter>
+    </ClInclude>
+    <ClInclude Include="asm\vm_exit.h">
+      <Filter>asm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\vmm_intrin.asm">
+      <Filter>asm</Filter>
+    </MASM>
+    <MASM Include="asm\vm_exit.asm">
       <Filter>asm</Filter>
     </MASM>
   </ItemGroup>

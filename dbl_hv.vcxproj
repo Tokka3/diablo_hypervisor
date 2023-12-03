@@ -128,6 +128,7 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="asm\vm_exit_source.c" />
     <ClCompile Include="core\init.c" />
     <ClCompile Include="core\logging.c" />
     <ClCompile Include="core\vmexit.c" />
@@ -137,7 +138,9 @@
     <ClCompile Include="vmcs\vmcs.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="asm\guest-context.h" />
     <ClInclude Include="asm\vmm_intrin.h" />
+    <ClInclude Include="asm\vm_exit.h" />
     <ClInclude Include="control_fields\vmx_exit.h" />
     <ClInclude Include="control_fields\vm_entry.h" />
     <ClInclude Include="encodings\control\control_encodings.h" />
@@ -174,6 +177,11 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="asm\vmm_intrin.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="asm\vm_exit.asm">
+      <FileType>Document</FileType>
+    </MASM>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

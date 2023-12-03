@@ -29,6 +29,7 @@
 #include "../asm/vmm_intrin.h"
 
 #include "../segments/segments.h"
+#include "ia32_defs.h"
 #define VMX_OK 0x0
 #define selector_mask 0xF8
 

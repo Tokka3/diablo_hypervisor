@@ -1,11 +1,7 @@
 ﻿  Building 'dbl_hv' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
   Stamping x64\Debug\dbl_hv.inf
-  Stamping [Version] section with DriverVer=12/01/2023,11.12.58.291
-  init.c
-C:\Users\admin\source\repos\dbl_hv\dbl_hv\headers\vmexit.h(5,57): warning C4115: '__vmexit_guest_registers_t': named type definition in parentheses
-  (compiling source file 'core/init.c')
-  
-  dbl_hv.vcxproj -> C:\Users\admin\source\repos\dbl_hv\x64\Debug\dbl_hv.sys
+  Stamping [Version] section with DriverVer=12/03/2023,14.57.58.842
+  dbl_hv.vcxproj -> C:\Users\admin\Desktop\dbl_hv\diablo_hypervisor\x64\Debug\dbl_hv.sys
   Driver is 'Universal'.
   .........................
   Signability test complete.
@@ -17,4 +13,4 @@ C:\Users\admin\source\repos\dbl_hv\dbl_hv\headers\vmexit.h(5,57): warning C4115:
   None
   
   Catalog generation complete.
-  C:\Users\admin\source\repos\dbl_hv\x64\Debug\dbl_hv\dbl_hv.cat
+  C:\Users\admin\Desktop\dbl_hv\diablo_hypervisor\x64\Debug\dbl_hv\dbl_hv.cat
